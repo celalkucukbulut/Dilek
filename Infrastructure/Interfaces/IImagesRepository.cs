@@ -1,0 +1,16 @@
+﻿using Core.Repositories;
+using Domain.Domains;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Infrastructure.Interfaces
+{
+    public interface IImagesRepository : IRepository<Images>
+    {
+        IEnumerable<Images> GetByDBCodes(int dbCode);
+        IEnumerable<Images> getAllProducts();
+    }
+}

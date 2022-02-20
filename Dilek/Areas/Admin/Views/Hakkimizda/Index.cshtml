@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Domain.Domains.Contents>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>HAKKIMIZDA</strong>
+    </h1>
+    <hr>
+</div>
+@foreach (var item in Model)
+{
+    <form action="@Url.Action("UpdateText", "Hakkimizda", new { Area = "Admin" })" method="post">
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <input type="hidden" name="ID" id="ID" value="@item.ID" />
+                <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
+                <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
+                <div class="form-group col-lg-4">
+                    <label>Başlık</label>
+                    <input type="text" class="form-control" value="@item.Title" id="title" name="title">
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Yazı</label>
+                    <textarea class="form-control" rows="6" id="text" name="text">@item.Text</textarea>
+                </div>
+                <div class="form-group col-lg-1" style="padding-top:25px">
+                    <input class="btn btn-success" type="submit" value="Güncelle" />
+                </div>
+                <div class="form-group col-lg-1" style="padding-top:5px">
+                    <button class="btn btn-danger" type="submit" formaction="@Url.Action("DeleteText", "Hakkimizda", new { Area = "Admin" })" onclick="return confirm()">Sil</button>
+                </div>
+                @if (item == Model.LastOrDefault())
+                {
+                    <div class="form-group col-lg-1">
+                        <input type="button" value="Yeni Yazı" class="btn btn-info" onclick="showDiv()" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </form>
+}
+@if (Model.Count().Equals(0))
+{
+    <form method="post">
+        <div class="form-group col-lg-12" id="area">
+            <div class="form-group col-lg-4">
+                <label>Başlık</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group col-lg-7">
+                <label>Yazı</label>
+                <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+            </div>
+            <div class="form-group col-lg-1" style="padding-top:25px">
+                <label></label>
+                <button class="btn btn-danger" type="submit" formaction="@Url.Action("AddText", "Hakkimizda", new { Area = "Admin" })">Ekle</button>
+            </div>
+        </div>
+    </form>
+}
+<form method="post">
+    <div class="form-group col-lg-12" id="area" style="display:none;">
+        <div class="form-group col-lg-4">
+            <label>Başlık</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group col-lg-7">
+            <label>Yazı</label>
+            <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+        </div>
+        <div class="form-group col-lg-1" style="padding-top:25px">
+            <label></label>
+            <button class="btn btn-danger" type="submit" formaction="@Url.Action("AddText", "Hakkimizda", new { Area = "Admin" })">Ekle</button>
+        </div>
+    </div>
+</form>
+

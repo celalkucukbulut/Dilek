@@ -1,0 +1,56 @@
+﻿@model Services.Results.HomepageResult
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Anasayfa - Dilek Fanila";
+
+}
+
+
+<div class="col-lg-12 text-center">
+    <div id="carousel-example-generic" class="carousel slide">
+        <ol class="carousel-indicators hidden-xs">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            @for (int i = 1; i < Model.Images.Count(); i++)
+            {
+                <li data-target="#carousel-example-generic" data-slide-to="@i"></li>
+            }
+        </ol>
+        <div class="carousel-inner" style="height:445px !important">
+            @foreach (var item in Model.Images)
+            {
+                if (Model.Images.First() == item)
+                {
+                    <div class="item active" style="height:445px !important">
+                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full" src="@Url.Content(item.FilePath)" alt="@item.Text">
+                    </div>
+                }
+                else
+                {
+                    <div class="item" style="height:445px !important">
+                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full" src="@Url.Content(item.FilePath)" alt="@item.Text">
+                    </div>
+                }
+            }
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+</div>
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>Anasayfa</strong>
+    </h1>
+    <hr>
+</div>
+@foreach (var item in Model.Contents)
+{
+    <div class="form-group col-lg-12">
+        <h4>@item.Title</h4>
+        <p>@item.Text</p>
+    </div>
+}

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Giriş Yapınız";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pen-title">
+    <h2>Giriş Yapınız</h2>
+</div>
+<div class="module form-module">
+    <div class="toggle" style="width:150px !important">
+        <a href="javascript:void(0)" data-toggle="tooltip">
+            <i class="fa fa-pencil"><span class="text-uppercase text-danger" ><strong>Şifremi Unuttum</strong></span></i>
+        </a>
+    </div>
+    <div class="form">
+        <h6>Kullanıcı Adı ve Şifre Girişi</h6>
+        <form action="@Url.Action("Login", "Login",new { Area = "Admin" })" method="post">
+            <input type="text" placeholder="Kullanıcı Adı" name="username" id="username" />
+            <input type="password" placeholder="Şifre" name="password" id="password" />
+            <input class="btn-info" type="submit" value="Giriş" />
+        </form>
+    </div>
+    <div class="form">
+        <h6>Şifremi Unuttum</h6>
+        <form action="@Url.Action("Forgot", "Login", new { Area = "Admin" })" method="post">
+            <input type="email" placeholder="Mail Adres" name="mailAddress" id="mailAddress" />
+            <input class="btn-info" type="submit" value="Gönder" />
+        </form>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "9c1764fc-5e2a-4421-9cf1-893c8d2f6d2e": {
+      "ProjectGuid": "9c1764fc-5e2a-4421-9cf1-893c8d2f6d2e",
+      "DisplayName": "Dilek",
+      "ColorIndex": 0
+    },
+    "66d2f281-22c6-4f12-922d-61348975ccf2": {
+      "ProjectGuid": "66d2f281-22c6-4f12-922d-61348975ccf2",
+      "DisplayName": "Infrastructure",
+      "ColorIndex": 1
+    },
+    "94867824-a5f1-4577-98d5-b4431ffd593f": {
+      "ProjectGuid": "94867824-a5f1-4577-98d5-b4431ffd593f",
+      "DisplayName": "Core",
+      "ColorIndex": 2
+    },
+    "c7d9111a-0895-4ee5-886c-9151511748f1": {
+      "ProjectGuid": "c7d9111a-0895-4ee5-886c-9151511748f1",
+      "DisplayName": "Domain",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c335d089-0aa7-4740-9a95-0241a0048960": {
+      "ProjectGuid": "c335d089-0aa7-4740-9a95-0241a0048960",
+      "DisplayName": "Dilek.Tests",
+      "ColorIndex": 4
+    },
+    "5bb5ca3b-f475-4747-ab00-ed4c3e35d9ed": {
+      "ProjectGuid": "5bb5ca3b-f475-4747-ab00-ed4c3e35d9ed",
+      "DisplayName": "Core",
+      "ColorIndex": 5
+    },
+    "197b9093-3198-4294-bbfa-e6cceb818511": {
+      "ProjectGuid": "197b9093-3198-4294-bbfa-e6cceb818511",
+      "DisplayName": "Services",
+      "ColorIndex": 6
+    }
+  },
+  "NextColorIndex": 7
+}

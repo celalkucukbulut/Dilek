@@ -1,0 +1,147 @@
+﻿@model Services.Results.HomepageResult
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 text-center">
+        <div style="height:100% !important">
+            @using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group col-lg-12">
+                    <label style="margin:15px" for="files" class="btn btn-default btn-file">
+                        Fotoğraf Seç <input type="file" name="files" id="files" class="hidden" accept="image/jpeg, image/png,image/jpg" onchange="readURL(this);" />
+                    </label>
+                    <input style="margin:15px" id="saveImage" class="btn btn-success" type="submit" value="Yükle" disabled />
+                </div>
+                <div class="form-group col-lg-12 hidden" id="imageDiv" style="height:500px !important">
+                    <div class="form-group col-lg-12" style="height:445px !important;width:100%">
+                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full" src="#" id="showImage">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-group col-lg-2"></div>
+                        <div class="form-group col-lg-8">
+                            <textarea class="form-control" rows="1" id="text" name="text" placeholder="Alt yazı ekleyebilirsiniz. Öncesinde yükleyeceğiniz fotoğrafı seçiniz." style="resize:none"></textarea>
+                        </div>
+                        <div class="form-group col-lg-2"></div>
+                    </div>
+                </div>
+                
+            }
+        </div>
+</div>
+
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>Anasayfa Fotoğrafları</strong>
+    </h1>
+    <hr>
+</div>
+@{int a = 0; }
+@foreach (var item in Model.Images)
+{
+
+    a += 1;
+    <form method="post">
+        <div class="col-sm-4 text-center">
+            <input type="hidden" name="ID" id="ID" value="@item.ID" />
+            <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
+            <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
+            <input type="hidden" name="Code" id="Code" value="@item.Code" />
+            <input type="hidden" name="FilePath" id="FilePath" value="@item.FilePath" />
+            <a href="@Url.Content(item.FilePath)" data-title="@item.Text" data-lightbox="roadtripSlider"><img class="img-responsive img-thumbnail" style="height:150px !important;width:100% !important" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
+            <h4>
+                <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
+            </h4>
+            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateSliderText", "Anasayfa", new { Area = "Admin" })">
+                <i class="fa fa fa-recycle"></i> Düzenle
+            </button>
+            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteSlider", "Anasayfa", new { Area = "Admin" })" onclick="return confirm()">
+                <i class="fa fa fa-trash"></i> Sil
+            </button>
+        </div>
+        @if (a % 3 == 0)
+        {
+            <div class="clearfix"></div>
+        }
+    </form>
+}
+
+
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>Anasayfa Yazıları</strong>
+    </h1>
+    <hr>
+</div>
+
+@foreach (var item in Model.Contents)
+{
+    <form action="@Url.Action("UpdateText", "Anasayfa", new { Area = "Admin" })" method="post">
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <input type="hidden" name="ID" id="ID" value="@item.ID" />
+                <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
+                <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
+                <div class="form-group col-lg-4">
+                    <label>Başlık</label>
+                    <input type="text" class="form-control" value="@item.Title" id="title" name="title">
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Yazı</label>
+                    <textarea class="form-control" rows="6" id="text" name="text">@item.Text</textarea>
+                </div>
+                <div class="form-group col-lg-1" style="padding-top:25px">
+                    <input class="btn btn-success" type="submit" value="Güncelle" />
+                </div>
+                <div class="form-group col-lg-1" style="padding-top:5px">
+                    <button class="btn btn-danger" type="submit" formaction="@Url.Action("DeleteText", "Anasayfa", new { Area = "Admin" })" onclick="return confirm()">Sil</button>
+                </div>
+                @if (item == Model.Contents.LastOrDefault())
+                {
+                    <div class="form-group col-lg-1">
+                        <input type="button" value="Yeni Yazı" class="btn btn-info" onclick="showDiv()" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </form>
+}
+@if (Model.Contents.Count().Equals(0))
+{
+    <form method="post">
+        <div class="form-group col-lg-12" id="area">
+            <div class="form-group col-lg-4">
+                <label>Başlık</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group col-lg-7">
+                <label>Yazı</label>
+                <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+            </div>
+            <div class="form-group col-lg-1" style="padding-top:25px">
+                <label></label>
+                <button class="btn btn-danger" type="submit" formaction="@Url.Action("AddText", "Anasayfa", new { Area = "Admin" })">Ekle</button>
+            </div>
+        </div>
+    </form>
+}
+<form method="post">
+    <div class="form-group col-lg-12" id="area" style="display:none;">
+        <div class="form-group col-lg-4">
+            <label>Başlık</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group col-lg-7">
+            <label>Yazı</label>
+            <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+        </div>
+        <div class="form-group col-lg-1" style="padding-top:25px">
+            <label></label>
+            <button class="btn btn-danger" type="submit" formaction="@Url.Action("AddText", "Anasayfa", new { Area = "Admin" })">Ekle</button>
+        </div>
+    </div>
+</form>

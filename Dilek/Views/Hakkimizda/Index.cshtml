@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Domain.Domains.Contents>
+@{
+    ViewBag.Title = "Hakkımızda  - Dilek Fanila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>HAKKIMIZDA</strong>
+    </h1>
+    <hr>
+</div>
+@foreach (var item in Model)
+{
+    <div class="form-group col-lg-12">
+        <h4>@item.Title</h4>
+        <p>@item.Text</p>
+    </div>
+}

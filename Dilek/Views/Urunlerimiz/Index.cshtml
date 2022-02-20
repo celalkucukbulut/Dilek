@@ -1,0 +1,115 @@
+﻿@model Services.Results.ProductResult
+@{
+    ViewBag.Title = "Ürünlerimiz - Dilek Fanila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>ÜRÜNLERİMİZ</strong>
+    </h1>
+    <hr>
+</div>
+@foreach (var item in Model.Contents.Where(q => q.DBCode == 10))
+{
+    <div class="form-group col-lg-12">
+        <h4>@item.Title</h4>
+        <p>@item.Text</p>
+    </div>
+}
+
+<div class="col-lg-12">
+    <h4>
+        KADIN GİYİM
+        <br>
+    </h4>
+</div>
+<br>
+
+@{int a = 0; }
+
+@foreach (var item in Model.Contents.Where(q => q.DBCode == 4))
+{
+    <div class="form-group col-lg-12">
+        <strong>@item.Title</strong>
+        <p>@item.Text</p>
+    </div>
+}
+
+@foreach (var item in Model.Images.Where(q => q.DBCode == 4))
+{
+    a += 1;
+    <div class="col-sm-4 text-center">
+        <a href="@Url.Content(item.FilePath)" data-title="@item.Text" data-lightbox="roadtripWomen"><img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
+        <h4>
+            <small>@item.Text</small>
+        </h4>
+    </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
+}
+
+<br>
+<div class="col-lg-12">
+    <h4>
+        ERKEK GİYİM
+        <br>
+    </h4>
+</div>
+<br>
+@foreach (var item in Model.Contents.Where(q => q.DBCode == 5))
+{
+    <div class="form-group col-lg-12">
+        <strong>@item.Title</strong>
+        <p>@item.Text</p>
+    </div>
+}
+@{a = 0; }
+@foreach (var item in Model.Images.Where(q => q.DBCode == 5))
+{
+    a += 1;
+    <div class="col-sm-4 text-center">
+        <a href="@Url.Content(item.FilePath)" data-lightbox="roadtripMen"><img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
+        <h4>
+            <small>@item.Text</small>
+        </h4>
+    </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
+}
+<br>
+
+<div class="col-lg-12">
+    <h4>
+        DİĞER MODEL VE RENKLERİMİZ
+        <br>
+    </h4>
+</div>
+<br>
+@foreach (var item in Model.Contents.Where(q => q.DBCode == 6))
+{
+    <div class="form-group col-lg-12">
+        <strong>@item.Title</strong>
+        <p>@item.Text</p>
+    </div>
+}
+@{a = 0; }
+@foreach (var item in Model.Images.Where(q => q.DBCode == 6))
+{
+    a += 1;
+    <div class="col-sm-4 text-center">
+        <a href="@Url.Content(item.FilePath)" data-lightbox="roadtripOther"><img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
+        <h4>
+            <small>@item.Text</small>
+        </h4>
+    </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
+}
